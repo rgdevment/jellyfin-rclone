@@ -13,7 +13,7 @@ if ! mountpoint -q /mnt/gdrive; then
 fi
 
 # Monta Google Drive:/media en /mnt/gdrive con cache VFS
-rclone mount gdrive:/media /mnt/gdrive \
+rclone mount gdrive:/Media /mnt/gdrive \
   --vfs-cache-mode=full \
   --vfs-cache-max-size=12G \
   --vfs-cache-max-age=12h \
