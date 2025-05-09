@@ -13,7 +13,7 @@ if mount | grep -q "$MOUNT_POINT"; then
   pkill -f "rclone mount gdrive:/media"
 
   echo "Limpiando cache temporal..."
-  rm -rf "$MOUNT_POINT/.cache"/*
+  sudo rm -rf "$MOUNT_POINT/.cache"/*
 
   echo "✅ Limpieza finalizada."
 else

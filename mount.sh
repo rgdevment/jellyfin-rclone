@@ -7,6 +7,11 @@
 sudo mkdir -p /mnt/gdrive
 sudo chown "$USER":"$USER" /mnt/gdrive
 
+if ! mountpoint -q /mnt/gdrive; then
+  echo "🧹 Limpiando /mnt/gdrive antes del montaje..."
+  sudo rm -rf /mnt/gdrive/*
+fi
+
 # Monta Google Drive:/media en /mnt/gdrive con cache VFS
 rclone mount gdrive:/media /mnt/gdrive \
   --vfs-cache-mode=full \
