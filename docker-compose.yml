@@ -1,0 +1,18 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - '8096:8096' # HTTP
+    volumes:
+      - jellyfin_config:/config
+      - /mnt/gdrive:/media/gdrive:ro
+    environment:
+      - TZ=America/Santiago
+      - PUID=1000
+      - PGID=1000
+
+volumes:
+  jellyfin_config:
