@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# DEPRECATED: Este script ya no se usa porque el montaje lo hace systemd vía rclone-mount.service
+# Se conserva solo como referencia manual.
+
+#🔧 El montaje de Google Drive ahora es manejado por systemd:
+#  - Servicio: rclone-mount.service
+#  - Requiere FUSE, permisos de sudo configurados
+#  - Ver logs con: journalctl -u rclone-mount -f
+
 # mount-gdrive.sh - Monta Google Drive en /mnt/gdrive para uso con Jellyfin
 
 # Asegúrate de tener FUSE activado con user_allow_other en /etc/fuse.conf

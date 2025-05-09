@@ -3,6 +3,7 @@ services:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
     read_only: true
+    restart: unless-stopped
     tmpfs:
       - /tmp
     network_mode: bridge
