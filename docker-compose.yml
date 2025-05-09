@@ -3,6 +3,9 @@ services:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
     restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
     network_mode: bridge
     ports:
       - '8096:8096' # HTTP
@@ -13,6 +16,11 @@ services:
       - TZ=America/Santiago
       - PUID=1000
       - PGID=1000
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
 
 volumes:
   jellyfin_config:
