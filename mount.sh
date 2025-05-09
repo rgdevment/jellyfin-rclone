@@ -22,7 +22,7 @@ rclone mount gdrive:/media /mnt/gdrive \
   --umask 002 \
   --cache-dir=/mnt/gdrive/.cache \
   --log-level INFO \
-  --log-file /var/log/rclone-media.log &
+  --log-file=/mnt/gdrive/.cache/rclone-media.log &
 
 # Mostrar confirmación
 sleep 2
