@@ -4,10 +4,10 @@
 
 up: mount
 	sleep 3
-	docker-compose -f docker-compose.yml up -d
+	docker compose -f docker-compose.yml up -d
 
 down:
-	docker-compose -f docker-compose.yml down
+	docker compose -f docker-compose.yml down
 
 mount:
 	@echo "🚀 Montando Google Drive..."
@@ -33,6 +33,6 @@ restart:
 		./mount.sh; \
 		sleep 3; \
 	fi
-	docker-compose -f docker-compose.yml down
+	docker compose -f docker-compose.yml down
 	sleep 2
-	docker-compose -f docker-compose.yml up -d
+	docker compose -f docker-compose.yml up -d
