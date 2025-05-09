@@ -9,7 +9,7 @@ services:
     ports:
       - '8096:8096' # HTTP
     volumes:
-      - jellyfin_config:/config
+      - /opt/backups/jellyfin:/config
       - /mnt/gdrive:/media/gdrive:ro
     environment:
       - TZ=America/Santiago
