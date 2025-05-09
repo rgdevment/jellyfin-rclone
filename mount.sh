@@ -25,9 +25,9 @@ rclone mount gdrive:/media /mnt/gdrive \
   --vfs-read-chunk-size=128M \
   --vfs-read-chunk-size-limit=2G \
   --umask 002 \
-  --cache-dir=/mnt/gdrive/.cache \
+  --cache-dir=/opt/jellyfin-rclone/cache \
   --log-level INFO \
-  --log-file=/opt/jellyfin-rclone/rclone-media.log &
+  --log-file=/opt/jellyfin-rclone/log/rclone-media.log &
 
 # Mostrar confirmación
 sleep 2
