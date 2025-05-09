@@ -34,8 +34,21 @@ rclone mount gdrive:/Media /mnt/gdrive \
   --log-level INFO \
   --log-file=/opt/jellyfin-rclone/log/rclone-media.log &
 
+# Esperar hasta 30 segundos que el montaje se active
+echo "⏳ Esperando que /mnt/gdrive esté montado..."
+tries=0
+max_tries=15
+
+until mountpoint -q /mnt/gdrive; do
+  sleep 2
+  tries=$((tries+1))
+  if [ "$tries" -ge "$max_tries" ]; then
+    echo "❌ Error: No se pudo montar /mnt/gdrive después de $((max_tries*2)) segundos."
+    exit 1
+  fi
+done
+
 # Mostrar confirmación
-sleep 2
 echo "✅ Google Drive montado en /mnt/gdrive con VFS cache activo (12G / 12h)."
 echo "Puedes usar este volumen en Jellyfin como /media/gdrive."
 echo "Para desmontar: sudo fusermount -u /mnt/gdrive"
