@@ -9,7 +9,7 @@ sudo chown "$USER":"$USER" /mnt/gdrive
 
 if ! mountpoint -q /mnt/gdrive; then
   echo "🧹 Limpiando /mnt/gdrive antes del montaje..."
-  sudo rm -rf /mnt/gdrive/*
+  sudo find /mnt/gdrive -mindepth 1 -delete
 fi
 
 # Monta Google Drive:/media en /mnt/gdrive con cache VFS
