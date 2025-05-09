@@ -7,6 +7,11 @@
 sudo mkdir -p /mnt/gdrive
 sudo chown "$USER":"$USER" /mnt/gdrive
 
+if mountpoint -q /mnt/gdrive; then
+  echo "ℹ️  /mnt/gdrive ya está montado. No se realizará el montaje de nuevo."
+  exit 0
+fi
+
 if ! mountpoint -q /mnt/gdrive; then
   echo "🧹 Limpiando /mnt/gdrive antes del montaje..."
   sudo find /mnt/gdrive -mindepth 1 -delete
