@@ -26,6 +26,7 @@ Este proyecto permite levantar un servidor Jellyfin que accede directamente a tu
 ### 1. Instalar rclone
 
 ```bash
+sudo apt update && sudo apt install unzip -y
 curl https://rclone.org/install.sh | sudo bash
 ```
 
@@ -36,10 +37,11 @@ rclone config
 ```
 
 Selecciona:
+
 - `n` para crear un nuevo remote
 - Nombre sugerido: `gdrive`
 - Tipo de almacenamiento: `drive`
-- Usa tu propio `client_id` y `client_secret` de Google Cloud Console *(opcional pero recomendado)*
+- Usa tu propio `client_id` y `client_secret` de Google Cloud Console _(opcional pero recomendado)_
 - Deja el resto como está o acepta los defaults
 - Autentica en el navegador cuando lo pida
 
@@ -72,6 +74,17 @@ make mount-service-logs    # Muestra últimos 50 logs del montaje
 make mount-service-restart # Reinicia el servicio de montaje
 make mount-service-stop    # Detiene el montaje
 ```
+
+---
+
+## Antes del servicio
+
+```
+sudo mkdir -p /mnt/gdrive
+sudo chown rgdevment:rgdevment /mnt/gdrive
+```
+
+y descomentar `user_allow_other` en `/etc/fuse.conf`
 
 ---
 
