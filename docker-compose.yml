@@ -12,7 +12,7 @@ services:
     volumes:
       - /opt/backups/jellyfin:/config
       - /opt/backups/jellyfin/transcode_cache:/cache
-      - /mnt/gdrive:/media/gdrive
+      - /mnt/gdrive:/media/gdrive:ro
     environment:
       - TZ=America/Santiago
       - PUID=1000
