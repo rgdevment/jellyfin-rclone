@@ -11,15 +11,12 @@ services:
       - '8096:8096'
     volumes:
       - /opt/backups/jellyfin:/config
-      - /mnt/gdrive:/media/gdrive:ro
+      - /opt/backups/jellyfin/transcode_cache:/cache
+      - /mnt/gdrive:/media/gdrive
     environment:
       - TZ=America/Santiago
       - PUID=1000
       - PGID=1000
-    mem_limit: 1500m
-    memswap_limit: 1500m
-    cpus: '1.0'
-    cpu_shares: 128
     logging:
       driver: 'json-file'
       options:
