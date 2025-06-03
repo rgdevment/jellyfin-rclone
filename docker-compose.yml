@@ -43,9 +43,7 @@ services:
     restart: unless-stopped
     tmpfs:
       - /tmp
-    network_mode: bridge
-    ports:
-      - '8096:8096'
+    network_mode: host
     volumes:
       - /opt/backups/jellyfin/config:/config
       - /opt/jellyfin-rclone/cache:/cache
