@@ -4,6 +4,7 @@ services:
     container_name: rclone_mount
     restart: unless-stopped
     privileged: true
+    network_mode: host
     volumes:
       - /home/rgdevment/.config/rclone:/config:ro
       - /mnt/gdrive:/data:shared,rslave
