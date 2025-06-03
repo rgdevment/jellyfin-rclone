@@ -12,8 +12,10 @@ services:
       - /opt/jellyfin-rclone/cache:/tmp/rclone_vfs_cache
       - /opt/jellyfin-rclone/log:/var/log/rclone
     environment:
+      - TZ=America/Santiago
       - PUID=1000
       - PGID=1000
+      - RCLONE_CONFIG=/config/rclone.conf
     command: >
       mount gdrive: /mnt/gdrive
       --vfs-cache-mode=full
