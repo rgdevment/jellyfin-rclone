@@ -1,4 +1,42 @@
 services:
+  rclone:
+    image: rclone/rclone:latest
+    container_name: rclone_mount
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - /home/rgdevment/.config/rclone:/config:ro
+      - /mnt/gdrive:/mnt/gdrive:shared,rslave
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+      - /opt/jellyfin-rclone/cache:/tmp/rclone_vfs_cache
+      - /opt/jellyfin-rclone/log:/var/log/rclone
+    environment:
+      - PUID=1000
+      - PGID=1000
+    command: >
+      mount gdrive: /mnt/gdrive
+      --vfs-cache-mode=full
+      --vfs-cache-max-size=12G
+      --vfs-cache-max-age=12h
+      --allow-other
+      --dir-cache-time=1000h
+      --poll-interval=15s
+      --buffer-size=512M
+      --drive-chunk-size=128M
+      --vfs-read-chunk-size=128M
+      --vfs-read-chunk-size-limit=2G
+      --umask 002
+      --cache-dir=/tmp/rclone_vfs_cache # Ruta dentro del contenedor de rclone para su caché VFS
+      --log-level INFO
+      --log-file=/var/log/rclone/rclone-media.log # Ruta dentro del contenedor de rclone para sus logs
+    healthcheck:
+      test: ["CMD-SHELL", "findmnt /mnt/gdrive || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
@@ -10,18 +48,18 @@ services:
     ports:
       - '8096:8096'
     volumes:
-      - /opt/backups/jellyfin:/config
-      - /opt/backups/jellyfin/transcode_cache:/cache
+      - /opt/backups/jellyfin/config:/config
+      - /opt/jellyfin-rclone/cache:/cache
       - /mnt/gdrive:/media/gdrive:ro
     environment:
       - TZ=America/Santiago
       - PUID=1000
       - PGID=1000
+    depends_on:
+      rclone:
+        condition: service_healthy
     logging:
       driver: 'json-file'
       options:
         max-size: '10m'
         max-file: '3'
-
-volumes:
-  jellyfin_config:
