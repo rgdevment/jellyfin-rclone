@@ -4,7 +4,6 @@ services:
     container_name: rclone_mount
     restart: unless-stopped
     privileged: true
-    network_mode: host
     volumes:
       - /home/rgdevment/.config/rclone:/config:ro
       - /mnt/gdrive:/data:shared,rslave
@@ -44,7 +43,9 @@ services:
     restart: unless-stopped
     tmpfs:
       - /tmp
-    network_mode: host
+    network_mode: bridge
+    ports:
+      - '8096:8096'
     volumes:
       - /opt/backups/jellyfin/config:/config
       - /opt/jellyfin-rclone/cache:/cache
