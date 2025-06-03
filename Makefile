@@ -3,7 +3,7 @@
 .PHONY: up down restart
 
 up:
-	docker compose -f docker-compose.yml up -d --build
+	docker compose -f docker-compose.yml up -d --force-recreate rclone
 
 # Apagar Jellyfin
 
@@ -16,4 +16,4 @@ restart:
 	@echo "🔁 Reiniciando Jellyfin..."
 	docker compose -f docker-compose.yml down
 	sleep 2
-	docker compose -f docker-compose.yml up -d
+	docker compose -f docker-compose.yml up -d --force-recreate rclone
