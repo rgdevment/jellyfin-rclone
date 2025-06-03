@@ -3,7 +3,7 @@
 .PHONY: up down restart
 
 up:
-	docker compose -f docker-compose.yml up -d
+	docker compose -f docker-compose.yml up -d --build
 
 # Apagar Jellyfin
 
