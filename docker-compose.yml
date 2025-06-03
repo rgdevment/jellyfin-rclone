@@ -58,7 +58,7 @@ services:
       - JELLYFIN_LOG_DIR=/var/log/jellyfin
     depends_on:
       rclone:
-        condition: service_healthy
+        condition: service_started
     logging:
       driver: 'json-file'
       options:
