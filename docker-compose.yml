@@ -35,12 +35,6 @@ services:
       --log-file=/var/log/rclone/rclone-media.log
       --rc
       --rc-no-auth
-    healthcheck:
-      test: ['CMD-SHELL', 'findmnt /data || exit 1']
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
 
   jellyfin:
     image: jellyfin/jellyfin:latest
