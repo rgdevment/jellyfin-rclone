@@ -6,7 +6,7 @@ services:
     privileged: true
     volumes:
       - /home/rgdevment/.config/rclone:/config:ro
-      - /mnt/gdrive:/mnt/gdrive:shared,rslave
+      - /mnt/gdrive:/data:shared,rslave
       - /etc/passwd:/etc/passwd:ro
       - /etc/group:/etc/group:ro
       - /opt/jellyfin-rclone/cache:/tmp/rclone_vfs_cache
@@ -17,7 +17,8 @@ services:
       - PGID=1000
       - RCLONE_CONFIG=/config/rclone.conf
     command: >
-      mount gdrive: /mnt/gdrive
+      mount gdrive: /data
+      --allow-non-empty
       --vfs-cache-mode=full
       --vfs-cache-max-size=12G
       --vfs-cache-max-age=12h
@@ -32,8 +33,10 @@ services:
       --cache-dir=/tmp/rclone_vfs_cache
       --log-level INFO
       --log-file=/var/log/rclone/rclone-media.log
+      --rc
+      --rc-no-auth
     healthcheck:
-      test: ['CMD-SHELL', 'findmnt /mnt/gdrive || exit 1']
+      test: ['CMD-SHELL', 'findmnt /data || exit 1']
       interval: 10s
       timeout: 5s
       retries: 5
