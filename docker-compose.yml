@@ -31,7 +31,7 @@ services:
       --log-level INFO
       --log-file=/var/log/rclone/rclone-media.log # Ruta dentro del contenedor de rclone para sus logs
     healthcheck:
-      test: ["CMD-SHELL", "findmnt /mnt/gdrive || exit 1"]
+      test: ['CMD-SHELL', 'findmnt /mnt/gdrive || exit 1']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -50,11 +50,13 @@ services:
     volumes:
       - /opt/backups/jellyfin/config:/config
       - /opt/jellyfin-rclone/cache:/cache
+      - /opt/jellyfin-rclone/log:/var/log/jellyfin
       - /mnt/gdrive:/media/gdrive:ro
     environment:
       - TZ=America/Santiago
       - PUID=1000
       - PGID=1000
+      - JELLYFIN_LOG_DIR=/var/log/jellyfin
     depends_on:
       rclone:
         condition: service_healthy
