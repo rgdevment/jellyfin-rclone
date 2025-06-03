@@ -27,9 +27,9 @@ services:
       --vfs-read-chunk-size=128M
       --vfs-read-chunk-size-limit=2G
       --umask 002
-      --cache-dir=/tmp/rclone_vfs_cache # Ruta dentro del contenedor de rclone para su caché VFS
+      --cache-dir=/tmp/rclone_vfs_cache
       --log-level INFO
-      --log-file=/var/log/rclone/rclone-media.log # Ruta dentro del contenedor de rclone para sus logs
+      --log-file=/var/log/rclone/rclone-media.log
     healthcheck:
       test: ['CMD-SHELL', 'findmnt /mnt/gdrive || exit 1']
       interval: 10s
