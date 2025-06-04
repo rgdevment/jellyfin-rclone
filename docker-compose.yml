@@ -32,6 +32,7 @@ services:
       --umask 002
       --cache-dir=/tmp/rclone_vfs_cache
       --log-level INFO
+      --vv
       --log-file=/var/log/rclone/rclone-media.log
       --rc
       --rc-no-auth
