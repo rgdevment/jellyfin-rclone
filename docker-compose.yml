@@ -11,7 +11,7 @@ services:
       - '8096:8096'
     volumes:
       - /opt/backups/jellyfin/config:/config
-      - /opt/jellyfin-rclone/cache:/cache
+      - /opt/jellyfin-rclone/cache/jellyfin:/cache
       - /opt/jellyfin-rclone/log:/var/log/jellyfin
       - /mnt/gdrive:/media/gdrive:ro
     environment:
