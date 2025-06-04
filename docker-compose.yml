@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     privileged: true
     volumes:
-      - /home/rgdevment/.config/rclone:/config:ro
+      - /opt/backups/rclone:/config
       - /mnt/gdrive:/data:shared,rslave
       - /etc/passwd:/etc/passwd:ro
       - /etc/group:/etc/group:ro
