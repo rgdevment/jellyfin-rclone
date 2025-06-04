@@ -1,42 +1,4 @@
 services:
-  rclone:
-    image: rclone/rclone:latest
-    container_name: rclone_mount
-    restart: unless-stopped
-    privileged: true
-    volumes:
-      - /opt/backups/rclone:/config
-      - /mnt/gdrive:/data:shared,rslave
-      - /etc/passwd:/etc/passwd:ro
-      - /etc/group:/etc/group:ro
-      - /opt/jellyfin-rclone/cache:/tmp/rclone_vfs_cache
-      - /opt/jellyfin-rclone/log:/var/log/rclone
-    environment:
-      - TZ=America/Santiago
-      - PUID=1000
-      - PGID=1000
-      - RCLONE_CONFIG=/config/rclone.conf
-    command: >
-      mount gdrive: /data
-      --allow-non-empty
-      --vfs-cache-mode=full
-      --vfs-cache-max-size=12G
-      --vfs-cache-max-age=12h
-      --allow-other
-      --dir-cache-time=1000h
-      --poll-interval=15s
-      --buffer-size=512M
-      --drive-chunk-size=128M
-      --vfs-read-chunk-size=128M
-      --vfs-read-chunk-size-limit=2G
-      --umask 002
-      --cache-dir=/tmp/rclone_vfs_cache
-      --log-level INFO
-      --vv
-      --log-file=/var/log/rclone/rclone-media.log
-      --rc
-      --rc-no-auth
-
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
@@ -57,9 +19,6 @@ services:
       - PUID=1000
       - PGID=1000
       - JELLYFIN_LOG_DIR=/var/log/jellyfin
-    depends_on:
-      rclone:
-        condition: service_started
     logging:
       driver: 'json-file'
       options:
